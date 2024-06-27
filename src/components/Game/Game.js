@@ -8,8 +8,6 @@ import Guess from '../Guess/Guess';
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import { checkGuess } from '../../game-helpers';
 import GameEnd from '../GameEnd/GameEnd';
-// Pick a random word on every pageload.
-// To make debugging easier, we'll log the solution in the console.
 
 function Game() {
   const [guesses, setGuesses] = useState([]);

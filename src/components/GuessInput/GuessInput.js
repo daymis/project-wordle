@@ -16,6 +16,7 @@ function GuessInput({ updateGuessesList, disabled }) {
         <input
           id="guess-input"
           type="text"
+          required
           value={userInput}
           minLength={5}
           maxLength={5}

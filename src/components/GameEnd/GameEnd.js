@@ -26,7 +26,9 @@ function GameEnd({ gameStatus, numGuesses, answer, resetGame }) {
       {gameStatus && (
         <div className={`${endGameText[gameStatus].className}`}>
           {endGameText[gameStatus].message}
-          <button onClick={resetGame}>Play Again!</button>
+          <button onClick={resetGame} id="play-again">
+            <div style={{ textEmphasis: 'filled sesame' }}>Play again!</div>
+          </button>
         </div>
       )}
     </div>

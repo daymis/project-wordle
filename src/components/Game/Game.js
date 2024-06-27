@@ -40,8 +40,6 @@ function Game() {
       ({ status }) => status === 'correct'
     );
 
-    debugger;
-
     isGameWon && setGameStatus('won');
     !isGameWon &&
       guesses.length === NUM_OF_GUESSES_ALLOWED - 1 &&

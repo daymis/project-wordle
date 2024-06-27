@@ -1,7 +1,6 @@
 import React from 'react';
 
 function GameEnd({ gameStatus, numGuesses, answer, resetGame }) {
-  debugger;
   const endGameText = {
     won: {
       className: 'happy banner',

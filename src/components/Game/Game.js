@@ -4,10 +4,11 @@ import { sample } from '../../utils';
 import { WORDS } from '../../data';
 import GuessInput from '../GuessInput/GuessInput';
 import Guess from '../Guess/Guess';
+import WonBanner from '../WonBanner/WonBanner';
+import LostBanner from '../LostBanner/LostBanner';
 
 import { NUM_OF_GUESSES_ALLOWED } from '../../constants';
 import { checkGuess } from '../../game-helpers';
-import GameEnd from '../GameEnd/GameEnd';
 
 function Game() {
   const [guesses, setGuesses] = useState([]);
@@ -29,18 +30,19 @@ function Game() {
       guess: userInput,
       id: crypto.randomUUID()
     };
-    setGuesses([...guesses, newGuess]);
-    updateGameStatus(newGuess);
+    const newGuesses = [...guesses, newGuess];
+    setGuesses(newGuesses);
+    updateGameStatus(newGuess, newGuesses.length);
   };
 
-  const updateGameStatus = (newGuess) => {
+  const updateGameStatus = (newGuess, numGuesses) => {
     const isGameWon = newGuess.guessStatus.every(
       ({ status }) => status === 'correct'
     );
 
     isGameWon && setGameStatus('won');
     !isGameWon &&
-      guesses.length === NUM_OF_GUESSES_ALLOWED - 1 &&
+      numGuesses === NUM_OF_GUESSES_ALLOWED &&
       setGameStatus('lost');
   };
 
@@ -51,17 +53,16 @@ function Game() {
           <Guess key={index} guessResult={guess} />
         )
       )}
-      {/* <GuessesList guesses={guesses} /> */}
       <GuessInput
         updateGuessesList={updateGuessesList}
         disabled={gameStatus === 'won' || gameStatus === 'lost'}
       />
-      <GameEnd
-        gameStatus={gameStatus}
-        numGuesses={guesses.length}
-        answer={answer}
-        resetGame={resetGame}
-      />
+      {gameStatus === 'won' && (
+        <WonBanner numGuesses={guesses.length} resetGame={resetGame} />
+      )}
+      {gameStatus === 'lost' && (
+        <LostBanner resetGame={resetGame} answer={answer} />
+      )}
     </div>
   );
 }

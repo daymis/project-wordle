@@ -1,5 +1,17 @@
 import React from 'react';
 
+function EmptyCell() {
+  return (
+    <>
+      <span className="cell"></span>
+      <span className="cell"></span>
+      <span className="cell"></span>
+      <span className="cell"></span>
+      <span className="cell"></span>
+    </>
+  );
+}
+
 function Guess({ guessResult }) {
   const guessStatus = guessResult?.guessStatus;
   return (
@@ -12,13 +24,7 @@ function Guess({ guessResult }) {
             </span>
           ))
         ) : (
-          <>
-            <span className="cell"></span>
-            <span className="cell"></span>
-            <span className="cell"></span>
-            <span className="cell"></span>
-            <span className="cell"></span>
-          </>
+          <EmptyCell />
         )}
       </p>
     </div>

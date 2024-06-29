@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 
 function GuessInput({ updateGuessesList, disabled }) {
   const [userInput, setUserInput] = useState('');
+
+  const inputRef = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -9,12 +11,17 @@ function GuessInput({ updateGuessesList, disabled }) {
     setUserInput('');
   };
 
+  useEffect(() => {
+    !disabled && inputRef.current.focus();
+  }, [disabled]);
+
   return (
     <div>
       <form className="guess-input-wrapper" onSubmit={handleSubmit}>
         <label htmlFor="guess-input">Enter guess:</label>
         <input
           id="guess-input"
+          ref={inputRef}
           type="text"
           required
           value={userInput}
